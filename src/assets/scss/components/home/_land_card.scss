@@ -1,0 +1,21 @@
+.land-card {
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  &__title {
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    font-size: 25px;
+    color: white;
+    background-color: black;
+  }
+  &__img {
+    overflow-y: auto;
+    aspect-ratio: 1;
+    @include scrollbar(5px, white, black);
+    img {
+      width: 100%;
+    }
+  }
+}

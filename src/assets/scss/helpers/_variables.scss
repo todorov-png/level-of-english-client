@@ -1,0 +1,25 @@
+:root {
+  --container-max-width: 1200px;
+  --container-padding: 20px;
+  --background-color: #eff3f8;
+  // --color-scroll-thumb: #d1dbed;
+  // --color-scroll-track: #fbfbff;
+  --color-custom-scroll-thumb: #bfbfbf;
+  --color-custom-scroll-track: transparent;
+  --main-gap: 16px;
+  --main-border-radius: 8px;
+  --block-padding: 16px;
+  // --font-size-xs: 12px;
+  // --font-size-s: 14px;
+  // --font-size-normal: 16px;
+  // --font-size-l: 18px;
+  // --font-size-xl: 20px;
+  // --font-size-xxl: 22px;
+  // --font-size-xxxl: 28px;
+  // --font-size-xxxxl: 32px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+}
+@import './_primeflex.scss';

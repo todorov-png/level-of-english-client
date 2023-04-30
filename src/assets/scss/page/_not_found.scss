@@ -1,0 +1,41 @@
+.not-found {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 20px;
+  @include tablet {
+    padding-bottom: 40px;
+  }
+  @include laptop {
+    padding-bottom: 60px;
+  }
+  &__title {
+    font-family: sans-serif;
+    font-size: 90px;
+    font-weight: 900;
+    background: url(@/assets/img/bg_404.webp) no-repeat;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: cover;
+    background-position: center;
+    @include tablet {
+      font-size: 160px;
+    }
+    @include laptop {
+      font-size: 230px;
+    }
+  }
+  &__subtitle {
+    font-family: sans-serif;
+    color: black;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    @include tablet {
+      font-size: 20px;
+    }
+    @include laptop {
+      font-size: 24px;
+    }
+  }
+}

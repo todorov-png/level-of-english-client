@@ -1,0 +1,67 @@
+@mixin iphone {
+	@media (min-width: 375px) {
+		@content;
+	}
+}
+
+@mixin large-iphone {
+	@media (min-width: 520px) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: 769px) {
+		@content;
+	}
+}
+
+@mixin laptop {
+	@media (min-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: 1280px) {
+		@content;
+	}
+}
+
+@mixin desktop-hd {
+	@media (min-width: 1366px) {
+		@content;
+	}
+}
+
+@mixin scrollbar(
+  $size,
+  $foreground-color,
+  $background-color: mix($foreground-color, var(--text-color), 50%),
+  $margin-size: 0
+) {
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+    scroll-behavior: smooth;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+    background-clip: padding-box;
+    border-radius: calc($size / 2);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+    background-clip: padding-box;
+    border-radius: calc($size / 2);
+    margin: $margin-size;
+  }
+
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
