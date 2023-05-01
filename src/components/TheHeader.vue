@@ -62,8 +62,6 @@
             return this.$t('HEADER.TITLE.USERS');
           case 'teams':
             return this.$t('HEADER.TITLE.TEAMS');
-          // case 'land':
-          //   return this.$t('HEADER.TITLE.LAND');
           case 'roles':
             return this.$t('HEADER.TITLE.ROLES');
           default:
@@ -87,7 +85,7 @@
             to: '/users',
           },
           {
-            permissions: ['createTeam', 'deleteTeam'],
+            permissions: ['createTeam', 'deleteTeam', 'assignTest'],
             label: this.$t('HEADER.MENU.TEAMS'),
             icon: 'pi-globe',
             to: '/teams',

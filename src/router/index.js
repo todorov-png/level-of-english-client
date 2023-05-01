@@ -8,7 +8,6 @@ import UsersView from '@/views/UsersView.vue';
 import LoginView from '@/views/LoginView.vue';
 import HomeView from '@/views/HomeView.vue';
 import ProfileView from '@/views/ProfileView.vue';
-// import LandView from '@/views/LandView.vue';
 import store from '@/store/index.ts';
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -42,12 +41,6 @@ const routes = [
         meta: { requiresAuth: true },
         component: TeamsView,
       },
-      // {
-      //   path: 'land',
-      //   name: 'land',
-      //   meta: { requiresAuth: true },
-      //   component: LandView,
-      // },
       {
         path: 'roles',
         name: 'roles',

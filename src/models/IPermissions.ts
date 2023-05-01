@@ -7,4 +7,5 @@ export interface IPermissions {
   deleteRole?: Boolean;
   createUser?: Boolean;
   deleteUser?: Boolean;
+  assignTest?: Boolean;
 }

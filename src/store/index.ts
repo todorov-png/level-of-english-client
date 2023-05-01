@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AuthService from '@/services/AuthService';
 import UserService from '@/services/UserService';
-import LandService from '@/services/LandService';
+import TestService from '@/services/TestService';
 import { AuthResponse } from '@/models/response/AuthResponse';
 import { createStore } from 'vuex';
 import { IUser, IUpdateUser } from '@/models/IUser';
@@ -14,7 +14,7 @@ export default createStore({
       user: {} as IUser,
       isAuth: false as boolean,
       isLoading: false as boolean,
-      products: [] as Array<any>,
+      tests: [] as Array<any>,
     };
   },
   // getters: {
@@ -35,8 +35,8 @@ export default createStore({
       state.user = user;
     },
 
-    setProducts(state: any, products: [any]) {
-      state.products = products;
+    setTests(state: any, tests: [any]) {
+      state.tests = tests;
     },
   },
 
@@ -119,7 +119,7 @@ export default createStore({
             permissions.createUser
           );
         case 'teams':
-          return !!(permissions.createTeam || permissions.deleteTeam);
+          return !!(permissions.createTeam || permissions.deleteTeam || permissions.assignTest);
         case 'roles':
           return !!(permissions.createRole || permissions.deleteRole);
         default:
@@ -140,12 +140,12 @@ export default createStore({
       }
     },
 
-    async getLands({ commit }: any) {
+    async getTests({ commit }: any) {
       try {
         commit('setLoading', true);
-        const response = await LandService.getLands();
+        const response = await TestService.getTests();
         commit('setLoading', false);
-        commit('setProducts', response.data);
+        commit('setTests', response.data);
         return { success: true };
       } catch (e: any) {
         if (e.response?.data?.message) {

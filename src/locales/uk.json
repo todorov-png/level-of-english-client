@@ -72,7 +72,8 @@
       "ASSIGN_ROLE": "Призначити роль",
       "DELETE_ROLE": "Видалити роль",
       "CREATE_USER": "Створити користувача",
-      "DELETE_USER": "Видалити користувача"
+      "DELETE_USER": "Видалити користувача",
+      "ASSIGN_TEST": "Призначити тест"
     },
     "CREATE_ROLE": {
       "HEADER": "Створити роль",
@@ -102,7 +103,6 @@
     },
     "COLUMN": {
       "NAME": "Назва",
-      "BEARER": "Bearer ключ",
       "MEMBERS": "Участников",
       "LINK_IG": "Посилання на telegram"
     },
@@ -110,18 +110,23 @@
       "HEADER": "Створити команду",
       "NAME": "Назва",
       "EMPTY_NAME": "Необхідно вказати назву.",
-      "BEARER": "Bearer",
-      "EMPTY_BEARER": "Необхідно вказати bearer ключ.",
       "LINK_TG": "Посилання telegram",
-      "SUCCESSFUL": "Команда створена успішно"
+      "SUCCESSFUL": "Команда створена успішно",
+      "TEST": {
+        "LABEL": "Тести",
+        "DROPDOWN": "Виберіть тести"
+      }
     },
     "CHANGE_TEAM": {
       "HEADER": "Редагувати команду",
       "NAME": "Назва",
       "EMPTY_NAME": "Необхідно вказати назву.",
-      "BEARER": "Bearer",
       "LINK_TG": "Посилання telegram",
-      "SUCCESSFUL": "Команда успішно відредагована"
+      "SUCCESSFUL": "Команда успішно відредагована",
+      "TEST": {
+        "LABEL": "Тести",
+        "DROPDOWN": "Виберіть тести"
+      }
     },
     "DELETE_TEAM": {
       "HEADER": "Підтвердити",

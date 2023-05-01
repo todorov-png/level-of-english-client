@@ -1,16 +1,16 @@
 <template>
   <NotActivated v-if="!isActivated" />
   <NotTeam v-else-if="!isTeam" />
-  <ProductsList v-else />
+  <TestList v-else />
 </template>
 
 <script>
-  import ProductsList from '@/components/ProductsList.vue';
+  import TestList from '@/components/TestList.vue';
   import NotActivated from '@/components/NotActivated.vue';
   import NotTeam from '@/components/NotTeam.vue';
 
   export default {
-    components: { ProductsList, NotActivated, NotTeam },
+    components: { TestList, NotActivated, NotTeam },
 
     computed: {
       isActivated() {

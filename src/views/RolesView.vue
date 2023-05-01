@@ -101,6 +101,11 @@
           <Checkbox v-model="data[field]" :binary="true" />
         </template>
       </Column>
+      <Column field="assignTest" :header="$t('ROLES.PERMISSIONS.ASSIGN_TEST')">
+        <template #editor="{ data, field }">
+          <Checkbox v-model="data[field]" :binary="true" />
+        </template>
+      </Column>
       <Column
         v-if="userPermissions.createRole"
         :rowEditor="true"
@@ -242,7 +247,8 @@
           'assignRole',
           'deleteRole',
           'createUser',
-          'deleteUser'
+          'deleteUser',
+          'assignTest'
         ],
         roles: [],
       };

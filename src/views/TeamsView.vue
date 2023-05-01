@@ -76,16 +76,17 @@
           {{ $t('TEAMS.CREATE_TEAM.EMPTY_NAME') }}
         </small>
       </div>
-      <div class="field">
-        <label for="create_bearer" class="mb-3">{{ $t('TEAMS.CREATE_TEAM.BEARER') }}</label>
-        <InputText
-          id="create_bearer"
-          v-model.trim="newTeam.bearer"
-          :class="{ 'p-invalid': submitted && !newTeam.bearer }"
+      <div class="field" v-if="userPermissions.assignTest">
+        <label for="create-test">{{ $t('TEAMS.CREATE_TEAM.TEST.LABEL') }}</label>
+        <MultiSelect
+          id="create-test"
+          v-model="selectedTest"
+          :options="tests"
+          :placeholder="$t('TEAMS.CREATE_TEAM.TEST.DROPDOWN')"
+          optionLabel="name"
+          class="w-full"
+          filter
         />
-        <small class="p-error" v-if="submitted && !newTeam.bearer">
-          {{ $t('TEAMS.CREATE_TEAM.EMPTY_BEARER') }}
-        </small>
       </div>
       <div class="field">
         <label for="create_link_tg" class="mb-3">{{ $t('TEAMS.CREATE_TEAM.LINK_TG') }}</label>
@@ -124,9 +125,17 @@
           {{ $t('TEAMS.CHANGE_TEAM.EMPTY_NAME') }}
         </small>
       </div>
-      <div class="field">
-        <label for="change_bearer" class="mb-3">{{ $t('TEAMS.CHANGE_TEAM.BEARER') }}</label>
-        <InputText id="change_bearer" v-model.trim="selectTeam.bearer" />
+      <div class="field" v-if="userPermissions.assignTest">
+        <label for="role">{{ $t('TEAMS.CHANGE_TEAM.TEST.LABEL') }}</label>
+        <MultiSelect
+          id="role"
+          v-model="selectedTest"
+          :options="tests"
+          :placeholder="$t('TEAMS.CHANGE_TEAM.TEST.DROPDOWN')"
+          optionLabel="name"
+          class="w-full"
+          filter
+        />
       </div>
       <div class="field">
         <label for="change_link_tg" class="mb-3">{{ $t('TEAMS.CHANGE_TEAM.LINK_TG') }}</label>
@@ -181,16 +190,18 @@
 
 <script>
   import TeamService from '@/services/TeamService';
+  import TestService from '@/services/TestService';
   import Button from 'primevue/button';
   import Dialog from 'primevue/dialog';
   import DataTable from 'primevue/datatable';
   import Column from 'primevue/column';
   import InputText from 'primevue/inputtext';
+  import MultiSelect from 'primevue/multiselect';
   import { FilterMatchMode } from 'primevue/api';
   import { showCatchMessage } from '@/helpers/showCatch.js';
 
   export default {
-    components: { DataTable, Column, InputText, Button, Dialog },
+    components: { DataTable, Column, InputText, Button, MultiSelect, Dialog },
     data() {
       return {
         submitted: false,
@@ -201,6 +212,8 @@
         filters: { global: { value: null, matchMode: FilterMatchMode.CONTAINS } },
         selectTeamIndex: null,
         selectTeam: {},
+        selectedTest: null,
+        tests: [],
         newTeam: {},
         teams: [],
       };
@@ -220,6 +233,12 @@
       async getData() {
         this.loading = true;
         try {
+          if (this.userPermissions.assignTest) {
+            const responseTests = await TestService.getList();
+            const tests = responseTests.data || [];
+            this.tests.push(...tests);
+          }
+
           const response = await TeamService.fetchTeams();
           const teams = response.data || [];
           this.teams = teams.reverse().map((team) => {
@@ -237,6 +256,7 @@
 
       openCreateModal() {
         this.submitted = false;
+        this.selectedTest = null;
         this.newTeam = {};
         this.createDialog = true;
       },
@@ -246,8 +266,13 @@
       },
 
       async createTeam() {
-        if (this.newTeam.name?.trim() && this.newTeam.bearer?.trim()) {
+        if (this.newTeam.name?.trim()) {
           try {
+            this.newTeam.tests = this.selectedTest
+              ? this.selectedTest.map((item) => {
+                  return { _id: item._id };
+                })
+              : [];
             const response = await TeamService.createTeam(this.newTeam);
             this.$toast.add({
               severity: 'success',
@@ -272,6 +297,7 @@
         const data = JSON.parse(JSON.stringify(event.data));
         if (data.linkTg === '------') data.linkTg = '';
         this.submitted = false;
+        this.selectedTest = null;
         this.selectTeam = data;
         this.selectTeamIndex = event.index;
         this.changeDialog = true;
@@ -284,6 +310,11 @@
       async changeTeam() {
         if (this.selectTeam.name?.trim()) {
           try {
+            this.selectTeam.tests = this.selectedTest
+              ? this.selectedTest.map((item) => {
+                  return { _id: item._id };
+                })
+              : [];
             await TeamService.updateTeam(this.selectTeam);
             this.$toast.add({
               severity: 'success',

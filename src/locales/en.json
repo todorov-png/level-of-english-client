@@ -72,7 +72,8 @@
       "ASSIGN_ROLE": "Assign role",
       "DELETE_ROLE": "Delete role",
       "CREATE_USER": "Create user",
-      "DELETE_USER": "Delete user"
+      "DELETE_USER": "Delete user",
+      "ASSIGN_TEST": "Assign test"
     },
     "CREATE_ROLE": {
       "HEADER": "Create role",
@@ -102,7 +103,6 @@
     },
     "COLUMN": {
       "NAME": "Name",
-      "BEARER": "Bearer",
       "MEMBERS": "Members",
       "LINK_IG": "Link telegram"
     },
@@ -110,18 +110,23 @@
       "HEADER": "Create team",
       "NAME": "Name",
       "EMPTY_NAME": "Name is required.",
-      "BEARER": "Bearer",
-      "EMPTY_BEARER": "Bearer is required.",
       "LINK_TG": "Link telegram",
-      "SUCCESSFUL": "Team created successfully"
+      "SUCCESSFUL": "Team created successfully",
+      "TEST": {
+        "LABEL": "Tests",
+        "DROPDOWN": "Select Tests"
+      }
     },
     "CHANGE_TEAM": {
       "HEADER": "Change team",
       "NAME": "Name",
       "EMPTY_NAME": "Name is required.",
-      "BEARER": "Bearer",
       "LINK_TG": "Link telegram",
-      "SUCCESSFUL": "Team change successfully"
+      "SUCCESSFUL": "Team change successfully",
+      "TEST": {
+        "LABEL": "Tests",
+        "DROPDOWN": "Select Tests"
+      }
     },
     "DELETE_TEAM": {
       "HEADER": "Confirm",

@@ -1,7 +1,7 @@
 export interface ITeam {
   _id?: string;
   name: string;
-  bearer: string;
+  tests: [string];
   linkTg?: string;
 }
 
