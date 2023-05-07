@@ -4,7 +4,7 @@ import UserService from '@/services/UserService';
 import TestService from '@/services/TestService';
 import { AuthResponse } from '@/models/response/AuthResponse';
 import { createStore } from 'vuex';
-import { IUser, IUpdateUser } from '@/models/IUser';
+import { IUser, IEditUser } from '@/models/IUser';
 import { API_URL } from '@/http';
 import { i18n } from '@/i18n';
 
@@ -119,7 +119,7 @@ export default createStore({
             permissions.createUser
           );
         case 'teams':
-          return !!(permissions.createTeam || permissions.deleteTeam || permissions.assignTest);
+          return !!(permissions.createTeam || permissions.deleteTeam);
         case 'roles':
           return !!(permissions.createRole || permissions.deleteRole);
         default:
@@ -127,9 +127,9 @@ export default createStore({
       }
     },
 
-    async updateUser({ commit }: any, userData: IUpdateUser) {
+    async updateUser({ commit }: any, userData: IEditUser) {
       try {
-        const response = await UserService.updateUser(userData);
+        const response = await UserService.edit(userData);
         commit('setUser', response.data);
         return { success: true };
       } catch (e: any) {

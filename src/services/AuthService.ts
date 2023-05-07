@@ -19,4 +19,8 @@ export default class AuthService {
   static async logout(): Promise<void> {
     return $api.post('/logout');
   }
+
+  static async sendActivationCode(): Promise<AxiosResponse> {
+    return $api.post('/activation-code');
+  }
 }

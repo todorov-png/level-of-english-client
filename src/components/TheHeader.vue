@@ -85,7 +85,7 @@
             to: '/users',
           },
           {
-            permissions: ['createTeam', 'deleteTeam', 'assignTest'],
+            permissions: ['createTeam', 'deleteTeam'],
             label: this.$t('HEADER.MENU.TEAMS'),
             icon: 'pi-globe',
             to: '/teams',

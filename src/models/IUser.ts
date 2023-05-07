@@ -6,14 +6,14 @@ export interface IUser {
   permissions?: object;
 }
 
-export interface IUpdateUser {
+export interface IEditUser {
   username: string;
   email: string;
   password: string;
   newPassword: string;
 }
 
-export interface IEditUser {
+export interface IUpdateUser {
   user: string | null;
   role: string | null;
   team: string | null;

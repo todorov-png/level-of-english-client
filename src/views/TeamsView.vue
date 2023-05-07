@@ -190,7 +190,7 @@
 
 <script>
   import TeamService from '@/services/TeamService';
-  import TestService from '@/services/TestService';
+  // import TestService from '@/services/TestService';
   import Button from 'primevue/button';
   import Dialog from 'primevue/dialog';
   import DataTable from 'primevue/datatable';
@@ -233,13 +233,7 @@
       async getData() {
         this.loading = true;
         try {
-          if (this.userPermissions.assignTest) {
-            const responseTests = await TestService.getList();
-            const tests = responseTests.data || [];
-            this.tests.push(...tests);
-          }
-
-          const response = await TeamService.fetchTeams();
+          const response = await TeamService.getAll();
           const teams = response.data || [];
           this.teams = teams.reverse().map((team) => {
             if (!team.linkTg) {
@@ -268,12 +262,7 @@
       async createTeam() {
         if (this.newTeam.name?.trim()) {
           try {
-            this.newTeam.tests = this.selectedTest
-              ? this.selectedTest.map((item) => {
-                  return { _id: item._id };
-                })
-              : [];
-            const response = await TeamService.createTeam(this.newTeam);
+            const response = await TeamService.create(this.newTeam);
             this.$toast.add({
               severity: 'success',
               summary: this.$t('TOAST.SUMMARY.SUCCESSFUL'),
@@ -310,12 +299,7 @@
       async changeTeam() {
         if (this.selectTeam.name?.trim()) {
           try {
-            this.selectTeam.tests = this.selectedTest
-              ? this.selectedTest.map((item) => {
-                  return { _id: item._id };
-                })
-              : [];
-            await TeamService.updateTeam(this.selectTeam);
+            await TeamService.update(this.selectTeam);
             this.$toast.add({
               severity: 'success',
               summary: this.$t('TOAST.SUMMARY.SUCCESSFUL'),
@@ -347,7 +331,7 @@
 
       async deleteTeam() {
         try {
-          await TeamService.deleteTeam({ team: this.selectTeam._id });
+          await TeamService.delete({ team: this.selectTeam._id });
           this.$toast.add({
             severity: 'success',
             summary: this.$t('TOAST.SUMMARY.SUCCESSFUL'),

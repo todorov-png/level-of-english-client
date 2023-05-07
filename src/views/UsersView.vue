@@ -287,18 +287,18 @@
         this.loading = true;
         try {
           if (this.userPermissions.assignRole) {
-            const responseRoles = await RoleService.fetchRolesList();
+            const responseRoles = await RoleService.getList();
             const roles = responseRoles.data || [];
             this.roles.push(...roles);
           }
 
           if (this.userPermissions.assignTeam) {
-            const responseTeams = await TeamService.fetchTeamsList();
+            const responseTeams = await TeamService.getList();
             const teams = responseTeams.data || [];
             this.teams.push(...teams);
           }
 
-          const responseUsers = await UserService.fetchUsers();
+          const responseUsers = await UserService.getAll();
           const users = responseUsers.data || [];
           this.users.push(...users.reverse().map((user) => this.formattingUser(user)));
         } catch (e) {
@@ -336,7 +336,7 @@
             team: this.selectedTeam._id,
           };
           try {
-            const response = await UserService.createUser(data);
+            const response = await UserService.create(data);
             this.$toast.add({
               severity: 'success',
               summary: this.$t('TOAST.SUMMARY.SUCCESSFUL'),
@@ -383,7 +383,7 @@
           teamId: this.selectedTeam._id,
         };
         try {
-          const response = await UserService.editUser(data);
+          const response = await UserService.update(data);
           this.$toast.add({
             severity: 'success',
             summary: this.$t('TOAST.SUMMARY.SUCCESSFUL'),
@@ -409,7 +409,7 @@
 
       async deleteUser() {
         try {
-          await UserService.deleteUser({ user: this.selectedUser._id });
+          await UserService.delete({ user: this.selectedUser._id });
           this.$toast.add({
             severity: 'success',
             summary: this.$t('TOAST.SUMMARY.SUCCESSFUL'),

@@ -28,7 +28,7 @@
   import Card from 'primevue/card';
   import Button from 'primevue/button';
   import EmailSvg from '@/assets/img/svg/email.svg';
-  import UserService from '@/services/UserService';
+  import AuthService from '@/services/AuthService';
 
   export default {
     components: { Card, Button },
@@ -42,7 +42,7 @@
     methods: {
       async sendNewActivationCode() {
         try {
-          await UserService.sendActivationCode();
+          await AuthService.sendActivationCode();
           this.$toast.add({
             severity: 'success',
             summary: this.$t('NOT_ACTIVATED.TOAST_SEND_CODE.SUMMARY'),
