@@ -143,7 +143,7 @@ export default createStore({
     async getTests({ commit }: any) {
       try {
         commit('setLoading', true);
-        const response = await TestService.getTests();
+        const response = await TestService.getAll();
         commit('setLoading', false);
         commit('setTests', response.data);
         return { success: true };

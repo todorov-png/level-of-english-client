@@ -80,7 +80,7 @@
         <label for="create-test">{{ $t('TEAMS.CREATE_TEAM.TEST.LABEL') }}</label>
         <MultiSelect
           id="create-test"
-          v-model="selectedTest"
+          v-model="selectedTests"
           :options="tests"
           :placeholder="$t('TEAMS.CREATE_TEAM.TEST.DROPDOWN')"
           optionLabel="name"
@@ -126,10 +126,10 @@
         </small>
       </div>
       <div class="field" v-if="userPermissions.assignTest">
-        <label for="role">{{ $t('TEAMS.CHANGE_TEAM.TEST.LABEL') }}</label>
+        <label for="test">{{ $t('TEAMS.CHANGE_TEAM.TEST.LABEL') }}</label>
         <MultiSelect
-          id="role"
-          v-model="selectedTest"
+          id="test"
+          v-model="selectedTests"
           :options="tests"
           :placeholder="$t('TEAMS.CHANGE_TEAM.TEST.DROPDOWN')"
           optionLabel="name"
@@ -190,7 +190,7 @@
 
 <script>
   import TeamService from '@/services/TeamService';
-  // import TestService from '@/services/TestService';
+  import TestService from '@/services/TestService';
   import Button from 'primevue/button';
   import Dialog from 'primevue/dialog';
   import DataTable from 'primevue/datatable';
@@ -212,7 +212,7 @@
         filters: { global: { value: null, matchMode: FilterMatchMode.CONTAINS } },
         selectTeamIndex: null,
         selectTeam: {},
-        selectedTest: null,
+        selectedTests: null,
         tests: [],
         newTeam: {},
         teams: [],
@@ -233,8 +233,10 @@
       async getData() {
         this.loading = true;
         try {
-          const response = await TeamService.getAll();
-          const teams = response.data || [];
+          const responseTests = await TestService.getList();
+          this.tests = responseTests.data || [];
+          const responseTeam = await TeamService.getAll();
+          const teams = responseTeam.data || [];
           this.teams = teams.reverse().map((team) => {
             if (!team.linkTg) {
               team.linkTg = '------';
@@ -250,7 +252,7 @@
 
       openCreateModal() {
         this.submitted = false;
-        this.selectedTest = null;
+        this.selectedTests = null;
         this.newTeam = {};
         this.createDialog = true;
       },
@@ -262,6 +264,7 @@
       async createTeam() {
         if (this.newTeam.name?.trim()) {
           try {
+            this.newTeam.tests = this.selectedTests.map((item) => item._id);
             const response = await TeamService.create(this.newTeam);
             this.$toast.add({
               severity: 'success',
@@ -286,8 +289,8 @@
         const data = JSON.parse(JSON.stringify(event.data));
         if (data.linkTg === '------') data.linkTg = '';
         this.submitted = false;
-        this.selectedTest = null;
         this.selectTeam = data;
+        this.selectedTests = this.tests.filter((item) => data.tests.includes(item._id))
         this.selectTeamIndex = event.index;
         this.changeDialog = true;
       },
@@ -299,6 +302,7 @@
       async changeTeam() {
         if (this.selectTeam.name?.trim()) {
           try {
+            this.selectTeam.tests = this.selectedTests.map((item) => item._id);
             await TeamService.update(this.selectTeam);
             this.$toast.add({
               severity: 'success',

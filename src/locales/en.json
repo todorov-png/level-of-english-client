@@ -21,7 +21,9 @@
       "USERS": "users",
       "TEAMS": "teams",
       "LAND": "land",
-      "ROLES": "roles"
+      "ROLES": "roles",
+      "TEST": "test",
+      "HISTORY": "history"
     },
     "MENU": {
       "PROFILE": "Profile",
@@ -207,6 +209,33 @@
     },
     "TOAST": {
       "DETAIL": "Data updated successfully"
+    }
+  },
+
+  "TESTS": {
+    "TABLE": {
+      "TITLE": "Test list",
+      "SEARCH": "Search",
+      "LOADING":"Loading test data. Please wait.",
+      "EMPTY": "Test not found."
+    },
+    "COLUMN": {
+      "NAME": "Name"
+    }
+  },
+
+  "HISTORY": {
+    "TABLE": {
+      "TITLE": "History",
+      "SEARCH": "Search",
+      "LOADING":"Loading history data. Please wait.",
+      "EMPTY": "History not found."
+    },
+    "COLUMN": {
+      "NAME": "Name",
+      "ATTEMPTS": "Attempts",
+      "GPA": "GPA",
+      "SCORE_MAX": "Highest score"
     }
   },
 

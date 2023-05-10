@@ -64,6 +64,10 @@
             return this.$t('HEADER.TITLE.TEAMS');
           case 'roles':
             return this.$t('HEADER.TITLE.ROLES');
+          case 'test':
+            return this.$t('HEADER.TITLE.TEST');
+          case 'history':
+            return this.$t('HEADER.TITLE.HISTORY');
           default:
             return '404';
         }

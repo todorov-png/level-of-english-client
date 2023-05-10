@@ -7,6 +7,8 @@ import TeamsView from '@/views/TeamsView.vue';
 import UsersView from '@/views/UsersView.vue';
 import LoginView from '@/views/LoginView.vue';
 import HomeView from '@/views/HomeView.vue';
+import TestView from '@/views/TestView.vue';
+import HistoryView from '@/views/HistoryView.vue';
 import ProfileView from '@/views/ProfileView.vue';
 import store from '@/store/index.ts';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -46,6 +48,18 @@ const routes = [
         name: 'roles',
         meta: { requiresAuth: true },
         component: RolesView,
+      },
+      {
+        path: 'test/:id',
+        name: 'test',
+        meta: { requiresAuth: true },
+        component: TestView,
+      },
+      {
+        path: 'history',
+        name: 'history',
+        meta: { requiresAuth: true },
+        component: HistoryView,
       },
     ],
   },

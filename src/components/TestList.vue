@@ -11,6 +11,9 @@
       <div class="flex flex-wrap align-items-center justify-content-between">
         <div class="flex align-items-center gap-2">
           <span class="text-xl text-900 font-bold">{{ $t('TESTS.TABLE.TITLE') }}</span>
+          <router-link :to="{ name: 'history' }" custom v-slot="{ navigate }">
+            <Button icon="pi pi-history" rounded raised severity="info" @click="navigate" />
+          </router-link>
         </div>
         <div class="p-input-icon-left w-auto">
           <i class="pi pi-search" />
@@ -26,14 +29,13 @@
     <Column>
       <template #body="slotProps">
         <div class="flex align-items-center justify-content-end gap-2">
-          <Button icon="pi pi-pencil" severity="info" rounded @click="openStateTest(slotProps)" />
-          <Button
-            icon="pi pi-trash"
-            rounded
-            raised
-            severity="danger"
-            @click="openPassageTest(slotProps)"
-          />
+          <router-link
+            :to="{ name: 'test', params: { id: slotProps.data._id } }"
+            custom
+            v-slot="{ navigate }"
+          >
+            <Button icon="pi pi-eye" severity="secondary" rounded @click="navigate" />
+          </router-link>
         </div>
       </template>
     </Column>
