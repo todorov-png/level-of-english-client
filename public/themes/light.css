@@ -1137,6 +1137,11 @@
   color: #6c757d;
 }
 
+.p-input-icon-right > svg:last-of-type {
+  right: 0.75rem;
+  color: #6c757d;
+}
+
 .p-input-icon-right > .p-inputtext {
   padding-right: 2.5rem;
 }

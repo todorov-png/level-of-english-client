@@ -102,7 +102,7 @@
         PathProfileSvg: ProfileSvg,
         theme: null,
         lang: null,
-        langOptions: ['EN', 'RU', 'UK'],
+        langOptions: ['EN', 'UK'],
         newUsername: '',
         newEmail: '',
         newPassword: '',
