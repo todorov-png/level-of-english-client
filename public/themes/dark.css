@@ -3,3 +3,12 @@
   right: 0.5rem;
   color: rgba(255, 255, 255, 0.6);
 }
+header > div > a > img {
+  border: 2px solid;
+}
+header {
+  background: var(--surface-border)!important;
+}
+#user_menu {
+  background: var(--surface-border)!important;
+}
